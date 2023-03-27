@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 // method to appear current tab different
 const currentTab = (history, path) => {
     if (history.location.pathname === path) {
-        return { color: "#2ecc72"  }
+        return { color: "#2ecc72" }
     } else {
         return { color: "#FFFFFF" }
     }
@@ -29,17 +29,17 @@ const Menu = ({ history }) => (
         </li>
         <li className="nav-item">
             <Link style={currentTab(history, "/admin/dashboard")} className='nav-link' to="/admin/dashboard">
-                Admin dashboard
+                Admin Dashboard
             </Link>
         </li>
         <li className="nav-item">
             <Link style={currentTab(history, "/signup")} className='nav-link' to="/signup">
-                Sign Up
+                Signup
             </Link>
         </li>
         <li className="nav-item">
             <Link style={currentTab(history, "/signin")} className='nav-link' to="/signin">
-                Sign In
+                Signin
             </Link>
         </li>
         <li className="nav-item">
