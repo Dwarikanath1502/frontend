@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 // method to appear current tab different
 const currentTab = (history, path) => {
     if (history.location.pathname === path) {
-        return { color: "#2ecc72" }
+        return { color: "#2ecc72" , fontWeight: "bold" }
     } else {
         return { color: "#FFFFFF" }
     }
