@@ -23,6 +23,7 @@ const Routes = () => {
                 <PrivateRoute path='/user/dashboard' exact component={UserDashboard} />
                 <AdminRoute path='/admin/dashboard' exact component={AdminDashboard} />
                 <AdminRoute path='/admin/create/categories' exact component={AddCategory} />
+                <AdminRoute path='/admin/manage/categories' exact component={AddCategory} />
             </Switch>
         </BrowserRouter>
     )

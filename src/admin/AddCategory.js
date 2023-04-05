@@ -4,7 +4,7 @@ import { isAuthenticated } from '../auth/helper'
 import { Link } from 'react-router-dom'
 import { createCategory } from './helper/adminapicall'
 
-
+// FIXME: success and error message not showng up
 const AddCategory = () => {
     const [name, setName] = useState("");
     const [error, setError] = useState(false)
@@ -46,6 +46,21 @@ const AddCategory = () => {
 
     }
 
+    const successMessage = () => {
+        if (success) {
+            return <h4 className="text-success">{name} category created successfully!</h4>
+
+        }
+    }
+
+    const errorMessage = () => {
+        if (error) {
+            return <h4 className="text-success">Failed to create category!</h4>
+
+        }
+    }
+
+
 
     const myCategoryForm = () => (
         <form>
@@ -73,7 +88,10 @@ const AddCategory = () => {
         >
             <div className="row bg-white rounded">
                 <div className="col-md-8 offset-md-2">
+
                     {myCategoryForm()}
+                    {successMessage()}
+                    {errorMessage()}
                     {goBack()}
                 </div>
             </div>
