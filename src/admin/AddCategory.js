@@ -15,7 +15,7 @@ const AddCategory = () => {
     const goBack = () => {
         return (
             <div className="mt-5">
-                <Link className='btn btn-sm btn-info mb3 ' to="/admin/dashboard">Admin Home</Link>
+                <Link className='btn btn-sm btn-success mb-3 ' to="/admin/dashboard">Admin Home</Link>
             </div>
         )
     }

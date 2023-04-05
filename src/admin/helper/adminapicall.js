@@ -88,6 +88,7 @@ export const getProduct = productId => {
 
 
 // update a product
+// productId is for fetching the product and product is updated product
 export const updateProduct = (productId, userId, token, product) => {
     return fetch(`${API}/product/${productId}/${userId}`, {
         method: "PUT",

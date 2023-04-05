@@ -10,7 +10,7 @@ const Base = ({
     <div>
         <Menu/>
         <div className="container-fluid">
-            <div className="jumbotron  text-white text-center"> {/*bg-dark*/ }
+            <div className="jumbotron text-white text-center"> {/*bg-dark*/ }
                 <h2 className="display-4">
                     {title}
                 </h2>
@@ -19,7 +19,7 @@ const Base = ({
                 </p>
             </div>
             {/* it will be the content to be displayed */}
-            <div classname={className}>{children}</div>
+            <div className={className}>{children}</div>
         </div>
         <footer className="footer bg-dark mt-auto py-3 ">
             <div className="container-fluid bg-success text-white text-center py-3">
