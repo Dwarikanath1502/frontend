@@ -1,30 +1,64 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Base from "../core/Base";
 import { Link } from "react-router-dom";
+import { getAllCategories } from "./helper/adminapicall";
+import { isAuthenticated } from "../auth/helper";
 
 const AddProduct = () => {
+
+  const { user, token } = isAuthenticated();
+
   const [values, setValues] = useState({
     name: "",
     description: "",
     price: "",
-    stock: ""
+    stock: "",
+    photo: "",
+    categories: [],
+    category: "",
+    loading: false,
+    error: "",
+    createdProduct: "",
+    getARedirect: false,
+    formData: ""
   });
 
-  const { name, description, price, stock } = values;
+  const { name, description, price, stock, categories, category, loading, error, createdProduct, getARedirect, formData } = values;
+
+  // preload will load all the existing data at the time of opening using useEffect hook
+  const preLoad = () => {
+    getAllCategories().then(data => {
+      // console.log(data);
+      if (data.error) {
+        setValues({ ...values, error: data.error })
+      } else {
+        setValues({ ...values, categories: data, formData: new FormData() })
+        // marked as bug
+        // console.log("CATE: ", categories);
+      }
+    })
+  }
+
+  useEffect(() => {
+    preLoad()
+  }, [])
+
 
   const onSubmit = () => {
-    //
+
   };
 
   const handleChange = name => event => {
-    //
+    const value = name === "photo" ? event.target.file[0] :event.target.value
+    formData.set(name, value);
+    setValues({...values, [name]: value}) 
   };
 
   const createProductForm = () => (
     <form>
       <span>Post photo</span>
       <div className="form-group">
-        <label className="btn btn-block btn-success">
+        <label className="btn btn-block btn-success mb-2">
           <input
             onChange={handleChange("photo")}
             type="file"
@@ -38,7 +72,7 @@ const AddProduct = () => {
         <input
           onChange={handleChange("name")}
           name="photo"
-          className="form-control"
+          className="form-control mb-2"
           placeholder="Name"
           value={name}
         />
@@ -47,7 +81,7 @@ const AddProduct = () => {
         <textarea
           onChange={handleChange("description")}
           name="photo"
-          className="form-control"
+          className="form-control mb-2"
           placeholder="Description"
           value={description}
         />
@@ -56,7 +90,7 @@ const AddProduct = () => {
         <input
           onChange={handleChange("price")}
           type="number"
-          className="form-control"
+          className="form-control mb-2"
           placeholder="Price"
           value={price}
         />
@@ -64,19 +98,26 @@ const AddProduct = () => {
       <div className="form-group">
         <select
           onChange={handleChange("category")}
-          className="form-control"
+          className="form-control mb-2"
           placeholder="Category"
         >
           <option>Select</option>
-          <option value="a">a</option>
-          <option value="b">b</option>
+          {categories &&
+            categories.map((cate, index) => (
+
+              <option key={index} value={cate._id}>
+                {cate.name}
+              </option>
+
+            ))
+          }
         </select>
       </div>
       <div className="form-group">
         <input
           onChange={handleChange("quantity")}
           type="number"
-          className="form-control"
+          className="form-control mb-2"
           placeholder="Quantity"
           value={stock}
         />
