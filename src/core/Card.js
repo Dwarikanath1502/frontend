@@ -1,18 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ImageHelper from './helper/ImageHelper';
+import { Redirect } from 'react-router-dom';
+import { AddItemToCart } from './helper/cartHelper';
 
 
 const Card = ({ product, addtoCart = true, removefromCart = false }) => {
+
+    const [redirect, setRedirect] = useState(false)
+
+
+
 
     const cartTitle = product ? product.name : "this is default photo"
     const cartDescription = product ? product.description : "this is default description"
     const cartPrice = product ? product.price : "this is default price"
 
+    const addToCart = () => {
+        AddItemToCart(product, () => setRedirect(true))
+
+    }
+
+    const getARedirect = (redirect) => {
+        if (redirect) {
+            return <Redirect to="/cart" />
+        }
+    }
+
+
     // method to show and remove button
     const showAddToCart = () => {
         return (
             addtoCart && (<button
-                onClick={() => { }}
+                onClick={ addToCart }
                 className="btn btn-block btn-outline-success mt-2 mb-2"
             >
                 Add to Cart
@@ -36,6 +55,8 @@ const Card = ({ product, addtoCart = true, removefromCart = false }) => {
         <div className="card text-white bg-dark border  border-info">
             <div className="card-header lead">{cartTitle}</div>
             <div className="card-body">
+                {/* redirect to cart page after adding to cart */}
+                {getARedirect(redirect)}
 
                 <ImageHelper product={product} />
 
