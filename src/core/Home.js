@@ -32,7 +32,7 @@ const Home = () => {
     <Base title="Homepage" description='Welcome to the Rockx T-shirt store'>
       {/* <h1 className='text-white'>Hello front end</h1> */}
       <div className="row text-center">
-        <h1 className="text-white">All of t-shirts</h1>
+        {/* <h1 className="text-white">All of t-shirts</h1> */}
         <div className="row">
           {products.map((product, index) => {
             return (

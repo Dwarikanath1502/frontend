@@ -1,13 +1,22 @@
 import React, { useState } from 'react'
 import ImageHelper from './helper/ImageHelper';
 import { Redirect } from 'react-router-dom';
-import { AddItemToCart } from './helper/cartHelper';
+import { AddItemToCart, removeItemFromCart } from './helper/cartHelper';
 
 
-const Card = ({ product, addtoCart = true, removefromCart = false }) => {
+// undefined is neither true nor false
+const Card = ({
+    product,
+    addtoCart = true,
+    removefromCart = false,
+    // function (f) { return f }
+    // whatever we are giving it throws it back 
+    setReload = f => f,
+    reload = undefined }) => {
 
     const [redirect, setRedirect] = useState(false)
-
+    //return count of the product for getting help in pushing to localStorage
+    const [count, setCount] = useState(product.count)
 
 
 
@@ -31,7 +40,7 @@ const Card = ({ product, addtoCart = true, removefromCart = false }) => {
     const showAddToCart = () => {
         return (
             addtoCart && (<button
-                onClick={ addToCart }
+                onClick={addToCart}
                 className="btn btn-block btn-outline-success mt-2 mb-2"
             >
                 Add to Cart
@@ -42,7 +51,11 @@ const Card = ({ product, addtoCart = true, removefromCart = false }) => {
         return (
             removefromCart && (
                 <button
-                    onClick={() => { }}
+                    onClick={() => {
+                        removeItemFromCart(product._id)
+                    //    if true -> false or false -> true
+                        setReload(!reload)
+                    }}
                     className="btn btn-block btn-outline-danger mt-2 mb-2"
                 >
                     Remove from cart

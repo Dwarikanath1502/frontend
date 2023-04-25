@@ -15,3 +15,29 @@ export const AddItemToCart = (item, next) => {
         next()
     }
 }
+
+export const loadCart = () => {
+    if (typeof window !== undefined) {
+        if (localStorage.getItem("cart")) {
+            return JSON.parse(localStorage.getItem("cart"))
+        }
+    }
+}
+
+export const removeItemFromCart = (productId) => {
+    let cart = []
+    if (typeof window !== undefined) {
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"))
+        }
+        cart.map((product, index) => {
+            if (product._id === productId) {
+                // at position index it will remove 1 item
+                cart.splice(index, 1)
+            }
+        })
+        // update cart
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }
+    return cart;
+}
