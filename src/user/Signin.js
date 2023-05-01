@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import {  Redirect } from 'react-router-dom'
 import Base from '../core/Base'
 import { signin, authenticate, isAuthenticated } from '../auth/helper'
 
 const Signin = () => {
 
     const [values, setValues] = useState({
-        email: "p@dn.com",
-        password: "12345",
+        email: "d@dn.com",
+        password: "123456",
         error: "",
         loding: false,
         didRedirect: false

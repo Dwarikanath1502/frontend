@@ -44,6 +44,9 @@ const AdminDashboard = () => {
                         <span className="badge badge-info text-success mr-2">E-mail: </span>{email}
                     </li>
                     <li className="list-group-item">
+                        <span className="badge badge-info text-success mr-2">Role: </span>{role}
+                    </li>
+                    <li className="list-group-item">
                         <span className="badge-danger text-danger">Admin Area</span>
                     </li>
                 </ul>

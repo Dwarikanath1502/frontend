@@ -41,3 +41,11 @@ export const removeItemFromCart = (productId) => {
     }
     return cart;
 }
+
+// when payment is sucessfull empty the cart
+export const cartEmpty = next => {
+    if (typeof window !== undefined) {
+        localStorage.removeItem("cart")
+        next();
+    }
+}

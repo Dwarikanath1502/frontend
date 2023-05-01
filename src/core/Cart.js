@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react'
 import '../styles.css'
 import Base from './Base';
 import Card from './Card';
-// PAI call
+// API call
 import { loadCart } from './helper/cartHelper';
 
 
 const Cart = () => {
 
     const [products, setProducts] = useState([])
+    // it just changes the val to true to false and falase to true
     const [reload, setReload] = useState(false)
     // if any point of time things gets update and want to forcefully update the thing then use reload
+    // here using to reload cart after removig product
     useEffect(() => {
         setProducts(loadCart())
     }, [reload])
@@ -29,8 +31,8 @@ const Cart = () => {
                         product={product}
                         addtoCart={false}
                         removefromCart={true}
-                        setReload = {setReload}
-                        reload = {reload}
+                        setReload={setReload}
+                        reload={reload}
                     />
                 ))}
             </div>
