@@ -54,7 +54,12 @@ const Cart = () => {
             {/* <h1 className='text-white'>Hello front end</h1> */}
             <div className="row text-center">
                 <div className="col-6">
-                    {loadAllProducts()}
+                    {
+                        products.length > 0 ? (
+                            loadAllProducts()
+                        ) : (
+                            <h3>No prducts in cart!</h3>
+                        )}
                 </div>
                 <div className="col-6">
                     {loadCheckout()}
