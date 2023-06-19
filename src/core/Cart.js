@@ -4,6 +4,7 @@ import Base from './Base';
 import Card from './Card';
 // API call
 import { loadCart } from './helper/cartHelper';
+import Payment from './Payment';
 
 
 const Cart = () => {
@@ -19,7 +20,7 @@ const Cart = () => {
 
 
 
-    const loadAllProducts = () => {
+    const loadAllProducts = (products) => {
         return (
             <div>
                 <h2>
@@ -42,7 +43,7 @@ const Cart = () => {
         return (
             <div>
                 <h2>
-                    For checkout
+                   <Payment/>
                 </h2>
             </div>
         )
@@ -56,13 +57,16 @@ const Cart = () => {
                 <div className="col-6">
                     {
                         products.length > 0 ? (
-                            loadAllProducts()
+                            loadAllProducts(products)
                         ) : (
                             <h3>No prducts in cart!</h3>
                         )}
                 </div>
                 <div className="col-6">
-                    {loadCheckout()}
+                   <Payment 
+                    products = {products}
+                    setReload = {setReload} //force reload
+                   />
                 </div>
 
             </div>

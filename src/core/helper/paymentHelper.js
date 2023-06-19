@@ -6,7 +6,7 @@ export const getToken = (userId, token) => {
         method: "GET",
         headers: {
             Accept: "application/json",
-            "Content_Type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         }
     })
@@ -22,7 +22,7 @@ export const processPayment = (userId, token, paymentInfo) => {
         method: "POST",
         headers: {
             Accept: "application/json",
-            "Content_Type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(paymentInfo)
