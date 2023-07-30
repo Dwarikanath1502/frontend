@@ -4,7 +4,8 @@ import Base from './Base';
 import Card from './Card';
 // API call
 import { loadCart } from './helper/cartHelper';
-import Payment from './Payment';
+// import Payment from './Payment';
+import Stripecheckout from './Stripecheckout';
 
 
 const Cart = () => {
@@ -39,15 +40,15 @@ const Cart = () => {
             </div>
         )
     }
-    const loadCheckout = () => {
-        return (
-            <div>
-                <h2>
-                   <Payment/>
-                </h2>
-            </div>
-        )
-    }
+    // const loadCheckout = () => {
+    //     return (
+    //         <div>
+    //             <h2>
+    //                 <Payment />
+    //             </h2>
+    //         </div>
+    //     )
+    // }
 
 
     return (
@@ -63,12 +64,17 @@ const Cart = () => {
                         )}
                 </div>
                 <div className="col-6">
-                   <Payment 
+                    {/* <Payment 
                     products = {products}
                     setReload = {setReload} //force reload
-                   />
-                </div>
+                   /> */}
+                    {/* TODO: stripe payment */}
+                    <Stripecheckout
+                        product={products}
+                        setReload={setReload}
+                    />
 
+                </div>
             </div>
         </Base>
     )
