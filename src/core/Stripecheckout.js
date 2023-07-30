@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { isAuthenticated } from '../auth/helper'
 import { cartEmpty, loadCart } from './helper/cartHelper'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import StripecheckoutButton from "react-stripe-checkout"
+import { API } from '../backend'
+import { createOrder } from './helper/orderHelper'
 
 
 
-const Stripecheckout = ({ 
-    products, 
-    setReload = f => f, 
-    reload = undefined 
+const Stripecheckout = ({
+    products,
+    setReload = f => f,
+    reload = undefined
 }) => {
 
     const [data, setData] = useState({
@@ -23,15 +26,46 @@ const Stripecheckout = ({
 
     const getAmount = () => {
         let amount = 0;
-        products.map(p => {
-            amount = amount + p.price
-        })
+        if (products != undefined && products.length > 0) {
+            products.map(p => {
+                amount = amount + p.price
+            })
+        }
         return amount;
+    }
+
+    const makePayment = (token) => {
+        const body = {
+            token,
+            products,
+        }
+        const headers = {
+            "Content-Type": "Application/json"
+        }
+        return fetch(`{API}/stripePayment`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(body)
+        })
+            .then(res => {
+                // call further methods here such as create order clear cart
+                console.log(res)
+            })
+            .catch(err => console.log(err))
     }
 
     const ShowStripeButton = () => {
         return isAuthenticated() ? (
-            <button className='btn btn-success'>Pay with Stripe</button>
+            <StripecheckoutButton
+                stripeKey=''
+                token={makePayment}
+                amount={getAmount() * 100} //stripe works in cents and * 100 will convert it to dollar
+                name="Buy Tshirts"
+                shippingAddress
+                billingAddress
+            >
+                <button className='btn btn-success'>Pay with Stripe</button>
+            </StripecheckoutButton>
         )
             : (
                 <Link to="/signn">
