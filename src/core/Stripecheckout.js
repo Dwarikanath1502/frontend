@@ -50,6 +50,9 @@ const Stripecheckout = ({
             .then(res => {
                 // call further methods here such as create order clear cart
                 console.log(res)
+                const { status } = res;
+                console.log("STATUS: ", status);
+                cartEmpty()
             })
             .catch(err => console.log(err))
     }
@@ -57,7 +60,7 @@ const Stripecheckout = ({
     const ShowStripeButton = () => {
         return isAuthenticated() ? (
             <StripecheckoutButton
-                stripeKey=''
+                stripeKey='pk_test_51NZs7hSB57D7vV47jNJ0RHCabGYdaAxDHDdDw5KJvZrWwbCiYriXxdUOBlnIZuiaalH8ebAyQ60nbyBnhOIfSW8y00xJ14sPLh'
                 token={makePayment}
                 amount={getAmount() * 100} //stripe works in cents and * 100 will convert it to dollar
                 name="Buy Tshirts"
